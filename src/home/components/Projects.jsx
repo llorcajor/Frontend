@@ -4,36 +4,32 @@ import ProjectCard from "./ProjectCard";
 
 import axios from "axios";
 
+const client = axios.create({
+  baseURL: "http://127.0.0.1:8000/api/v1/latest-projects/" 
+});
+
 function Projects() {
 
-    const baseURL = "http://127.0.0.1:8000/api/v1/latest-projects/";
-    const [post, setPost] = React.useState(null);
+    const [post, setPost] = React.useState([]);
 
     React.useEffect(() => {
-        axios.get(baseURL).then((response) => {
-          setPost(response.data);
-        });
-      }, []);
+      async function getPost() {
+        const response = await client.get("");
+        setPost(response.data);
+      }
+      getPost();
+    }, []);
 
-
+if(post){
     return (
         <div className="band">
 
-        
-
-         <ProjectCard  classname="card" image="https://static.rfstat.com/renderforest/images/v2/logo-homepage/gradient_3.png" user="llorcajor" name="MBIP" description="Plataforma web para la creación de proyectos" experience="Alta" months="2" wanted="Ingenier@"/>
-
-         <ProjectCard classname="card" image="https://static.rfstat.com/renderforest/images/v2/logo-homepage/gradient_3.png" user="llorcajor" name="MBIP" description="Plataforma web para la creación de proyectos" experience="Alta" months="2" wanted="Ingenier@"/>
-
-         <ProjectCard classname="card" image="https://static.rfstat.com/renderforest/images/v2/logo-homepage/gradient_3.png" user="llorcajor" name="MBIP" description="Plataforma web para la creación de proyectos" experience="Alta" months="2" wanted="Ingenier@"/>
-
-         <ProjectCard classname="card" image="https://static.rfstat.com/renderforest/images/v2/logo-homepage/gradient_3.png" user="llorcajor" name="MBIP" description="Plataforma web para la creación de proyectos" experience="Alta" months="2" wanted="Ingenier@"/>
-
-         
+          {post.map(card => <ProjectCard classname="card" image="https://static.rfstat.com/renderforest/images/v2/logo-homepage/gradient_3.png" user="llorcajor" name={card.name} description={card.description} experience="Alta" months="2" wanted="Ingenier@"/>)}
 
          </div>
          
     )
+  }
 }
 
 export default Projects;

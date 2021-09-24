@@ -4,6 +4,8 @@ import './SearchBar.css';
 
 function SearchBar() {
 
+    
+
     return (
         <div>
             <form class="search-container">
