@@ -1,4 +1,4 @@
-import Navbar from './home/components/Navbar';
+import Navbar from './navbar/components/Navbar';
 import ProjectCard from './home/components/ProjectCard';
 import './App.css';
 import Projects from './home/components/Projects';
